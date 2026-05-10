@@ -50,7 +50,19 @@ body::before{
 }
 
 /* ЛОГО */
-./logo.png
+
+.logo{
+
+    position:absolute;
+
+    left:35px;
+
+    top:35px;
+
+    width:180px;
+
+    z-index:20;
+}
 
 /* ВЕРХНИЕ КНОПКИ */
 
@@ -82,22 +94,24 @@ body::before{
     cursor:pointer;
 
     color:black;
+
+    transition:0.2s;
 }
 
 .topbar button:hover{
 
-    transform:scale(1.04);
+    transform:scale(1.05);
 }
 
-/* ЗАГОЛОВОК */
+/* TITLE */
 
 h1{
 
-    margin-top:55px;
+    margin-top:40px;
 
-    margin-bottom:4px;
+    margin-bottom:5px;
 
-    font-size:54px;
+    font-size:58px;
 
     color:black;
 
@@ -112,15 +126,15 @@ h1{
 
     color:white;
 
-    font-size:28px;
+    font-size:30px;
 
-    margin-bottom:14px;
+    margin-bottom:12px;
 
     text-shadow:
     0 0 10px rgba(0,0,0,0.8);
 }
 
-/* ИГРОВОЕ ПОЛЕ */
+/* GAME */
 
 canvas{
 
@@ -136,7 +150,7 @@ canvas{
 
 #submitBtn{
 
-    margin-top:14px;
+    margin-top:12px;
 
     padding:16px 54px;
 
@@ -151,11 +165,13 @@ canvas{
     font-weight:bold;
 
     color:black;
+
+    transition:0.2s;
 }
 
 #submitBtn:hover{
 
-    transform:scale(1.03);
+    transform:scale(1.04);
 }
 
 /* STATUS */
@@ -201,11 +217,11 @@ canvas{
 <!-- ЛОГО -->
 <img
 class="logo"
-src="https://raw.githubusercontent.com/PinksDreams/ritualtetris/main/ritual-logo.png"
+src="./logo.png"
 alt="logo"
 >
 
-<!-- TOP BUTTONS -->
+<!-- КНОПКИ -->
 <div class="topbar">
 
     <button id="startBtn">
