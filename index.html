@@ -14,248 +14,162 @@ body{
     margin:0;
     overflow:hidden;
     font-family:Arial,sans-serif;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    min-height:100vh;
-
-    background:
-    radial-gradient(circle at 20% 20%, rgba(255,255,255,0.4) 0%, transparent 20%),
-    radial-gradient(circle at 80% 30%, rgba(255,255,255,0.25) 0%, transparent 20%),
-    radial-gradient(circle at 50% 80%, rgba(255,255,255,0.2) 0%, transparent 25%),
-    linear-gradient(135deg,#e7d7b2,#d7c39a);
-}
-
-body::before{
-    content:"";
-    position:fixed;
-    inset:0;
-
+    background:#e7d9b6;
     background-image:
-    repeating-radial-gradient(
-        circle at 0 0,
-        rgba(0,0,0,0.02),
-        rgba(0,0,0,0.02) 1px,
-        transparent 1px,
-        transparent 6px
-    );
-
-    pointer-events:none;
+      radial-gradient(circle at 20% 20%, rgba(255,255,255,0.3), transparent 20%),
+      radial-gradient(circle at 80% 30%, rgba(255,255,255,0.15), transparent 20%),
+      radial-gradient(circle at 40% 70%, rgba(255,255,255,0.15), transparent 20%);
 }
 
-/* ЛОГО */
+/* LOGO */
 
 .logo{
     position:absolute;
-    left:35px;
-    top:35px;
-    width:180px;
-    z-index:20;
+    top:70px;
+    left:40px;
+    width:170px;
+    filter:drop-shadow(0 0 12px rgba(255,255,255,0.6));
 }
 
-/* TOPBAR */
+/* TOP BUTTONS */
 
-.topbar{
+.topButtons{
     position:absolute;
     top:20px;
     right:20px;
     display:flex;
-    gap:14px;
+    gap:15px;
 }
 
-.topbar button{
-
-    background:#27ffb2;
-
-    border:2px solid black;
-
+.topBtn{
+    background:#25ffb5;
+    border:2px solid #111;
+    color:#111;
+    font-size:22px;
+    font-weight:bold;
     padding:14px 28px;
-
-    font-size:20px;
-
-    font-weight:bold;
-
     cursor:pointer;
-
-    color:black;
-
-    transition:0.2s;
-
-    min-width:220px;
+    box-shadow:0 0 12px rgba(37,255,181,0.5);
 }
 
-.topbar button:hover{
-    transform:scale(1.05);
+.topBtn:hover{
+    transform:scale(1.03);
 }
 
-/* TITLE */
+/* GAME AREA */
 
-h1{
-    margin-top:40px;
-    margin-bottom:5px;
-    font-size:58px;
-    color:black;
-    font-weight:bold;
-    letter-spacing:1px;
+.wrapper{
+    width:100%;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
 }
 
-/* SCORE */
+.gameBox{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+}
 
-#score{
+.title{
+    font-size:72px;
+    color:#111;
+    margin-bottom:10px;
+    text-shadow:0 0 20px rgba(37,255,181,0.5);
+}
+
+.score{
+    font-size:42px;
     color:white;
-    font-size:30px;
-    margin-bottom:12px;
-
-    text-shadow:
-    0 0 10px rgba(0,0,0,0.8);
+    margin-bottom:20px;
+    text-shadow:0 0 10px rgba(0,0,0,0.6);
 }
-
-/* GAME */
 
 canvas{
-
-    border:4px solid #27ffb2;
-
-    background:#1a1a1a;
-
-    box-shadow:
-    0 0 25px rgba(39,255,178,0.5);
+    background:#1b1b1b;
+    border:4px solid #25ffb5;
+    box-shadow:0 0 20px rgba(37,255,181,0.6);
 }
 
-/* SUBMIT */
-
-#submitBtn{
-
-    margin-top:12px;
-
-    padding:16px 54px;
-
-    background:#27ffb2;
-
-    border:2px solid black;
-
-    cursor:pointer;
-
-    font-size:26px;
-
+.submitBtn{
+    margin-top:20px;
+    background:#25ffb5;
+    border:2px solid #111;
+    color:#111;
+    font-size:24px;
     font-weight:bold;
-
-    color:black;
-
-    transition:0.2s;
+    padding:14px 40px;
+    cursor:pointer;
+    width:320px;
 }
 
-#submitBtn:hover{
-    transform:scale(1.04);
+.submitBtn:hover{
+    transform:scale(1.02);
 }
-
-/* STATUS */
 
 #status{
-
-    margin-top:12px;
-
-    color:white;
-
+    margin-top:15px;
+    color:#333;
     font-size:18px;
-
-    text-shadow:
-    0 0 8px rgba(0,0,0,0.9);
-
-    max-width:700px;
-
     text-align:center;
-}
-
-/* CREDIT */
-
-.credit{
-
-    position:absolute;
-
-    left:20px;
-
-    bottom:18px;
-
-    color:#a38f8f;
-
-    font-size:18px;
-
-    font-weight:bold;
 }
 
 /* LEADERBOARD */
 
 .leaderboard{
-
     position:absolute;
-
-    right:30px;
-
-    top:120px;
-
-    width:360px;
+    right:60px;
+    top:150px;
+    width:350px;
 }
 
-.leaderboard h2{
-
-    margin:0 0 10px 0;
-
-    font-size:62px;
-
+.lbTitle{
+    font-size:64px;
     color:white;
-
-    text-shadow:
-    0 0 12px rgba(0,0,0,0.5);
+    margin-bottom:10px;
+    text-shadow:0 0 10px rgba(0,0,0,0.5);
 }
 
-.leaderboard-table{
-
-    border:2px solid black;
-}
-
-.leader-row{
-
+.lbRow{
     display:flex;
-
     justify-content:space-between;
-
     align-items:center;
-
     padding:14px 18px;
-
     font-size:28px;
-
-    border-bottom:2px solid black;
-
+    border:2px solid #222;
     color:white;
-
-    text-shadow:
-    0 0 10px rgba(255,255,255,0.7);
 }
 
-.leader-row:nth-child(1),
-.leader-row:nth-child(2),
-.leader-row:nth-child(3){
-
-    background:#eb8de6;
+.lbRow:nth-child(2),
+.lbRow:nth-child(3),
+.lbRow:nth-child(4){
+    background:#e786e7;
 }
 
-.leader-row:nth-child(n+4){
-
-    background:#8be3e0;
+.lbRow:nth-child(n+5){
+    background:#84dfdf;
 }
 
-.leader-rank{
+.rank{
+    width:40px;
+}
+
+.wallet{
+    flex:1;
+    margin-left:10px;
+}
+
+.points{
     font-weight:bold;
 }
 
-.leader-address{
-    flex:1;
-    text-align:center;
-}
-
-.leader-score{
+.footer{
+    position:absolute;
+    left:20px;
+    bottom:20px;
+    color:#7d6f77;
+    font-size:18px;
     font-weight:bold;
 }
 
@@ -264,25 +178,33 @@ canvas{
 
 <body>
 
-<!-- ЛОГО -->
+<!-- LOGO -->
+<img src="logo.png" class="logo">
 
-<img
-class="logo"
-src="./logo.png"
-alt="logo"
->
+<!-- BUTTONS -->
+<div class="topButtons">
+    <button class="topBtn" id="startBtn">Start</button>
+    <button class="topBtn" id="walletBtn">Wallet Connect</button>
+</div>
 
-<!-- TOP BUTTONS -->
+<!-- GAME -->
+<div class="wrapper">
 
-<div class="topbar">
+    <div class="gameBox">
 
-    <button id="startBtn">
-        Start
-    </button>
+        <div class="title">Ritual Tetris</div>
 
-    <button id="connectBtn">
-        Wallet Connect
-    </button>
+        <div class="score" id="score">Score: 0</div>
+
+        <canvas id="game" width="300" height="600"></canvas>
+
+        <button class="submitBtn" id="submitBtn">
+            Submit score
+        </button>
+
+        <div id="status"></div>
+
+    </div>
 
 </div>
 
@@ -290,53 +212,33 @@ alt="logo"
 
 <div class="leaderboard">
 
-    <h2>Leaderboard</h2>
+    <div class="lbTitle">Leaderboard</div>
 
-    <div
-    class="leaderboard-table"
-    id="leaderboardTable">
-
-    </div>
+    <div id="leaderboardRows"></div>
 
 </div>
 
-<!-- TITLE -->
-
-<h1>Ritual Tetris</h1>
-
-<!-- SCORE -->
-
-<div id="score">
-    Score: 0
-</div>
-
-<!-- GAME -->
-
-<canvas id="game" width="300" height="600"></canvas>
-
-<!-- SUBMIT -->
-
-<button id="submitBtn">
-    Submit score
-</button>
-
-<!-- STATUS -->
-
-<div id="status"></div>
-
-<!-- CREDIT -->
-
-<div class="credit">
+<div class="footer">
     Made by PinkDreams
 </div>
 
 <script>
 
-const canvas =
-document.getElementById("game");
+const CONTRACT_ADDRESS = "0x1cb429c5D7Bbfc4C905d745c84b008Ea528d75f4";
 
-const ctx =
-canvas.getContext("2d");
+const ABI = [
+  "function submitScore(uint256 points) external",
+  "event ScoreSubmitted(address indexed player, uint256 points)"
+];
+
+const canvas = document.getElementById("game");
+const ctx = canvas.getContext("2d");
+
+const scoreEl = document.getElementById("score");
+const submitBtn = document.getElementById("submitBtn");
+const statusEl = document.getElementById("status");
+const walletBtn = document.getElementById("walletBtn");
+const leaderboardRows = document.getElementById("leaderboardRows");
 
 const COLS = 10;
 const ROWS = 20;
@@ -345,122 +247,29 @@ const BLOCK = 30;
 let board = [];
 let score = 0;
 let gameOver = false;
-
 let gameStarted = false;
-let walletConnected = false;
+let gameInterval = null;
 
-let currentWallet = "";
-
-const leaderboardTable =
-document.getElementById(
-"leaderboardTable"
-);
-
-const scoreEl =
-document.getElementById("score");
-
-const submitBtn =
-document.getElementById("submitBtn");
-
-const statusEl =
-document.getElementById("status");
-
-const connectBtn =
-document.getElementById("connectBtn");
-
-const CONTRACT_ADDRESS =
-"0x1cb429c5D7Bbfc4C905d745c84b008Ea528d75f4";
-
-const ABI = [
-  "function submitScore(uint256 points) external"
-];
+let connectedWallet = null;
 
 const PIECES = [
-
-  [[1,1],[1,1]],
-
-  [[1,1,1,1]],
-
-  [[1,1,1],[0,1,0]],
-
-  [[1,1,0],[0,1,1]],
-
-  [[0,1,1],[1,1,0]],
-
-  [[1,1,1],[1,0,0]],
-
-  [[1,1,1],[0,0,1]]
+ [[1,1],[1,1]],
+ [[1,1,1,1]],
+ [[1,1,1],[0,1,0]],
+ [[1,1,0],[0,1,1]],
+ [[0,1,1],[1,1,0]],
+ [[1,1,1],[1,0,0]],
+ [[1,1,1],[0,0,1]]
 ];
 
-/* LEADERBOARD STORAGE */
-
-let leaderboard =
-JSON.parse(
-localStorage.getItem("ritualLeaderboard")
-) || [];
-
-/* SHORT ADDRESS */
-
-function shortAddress(address){
-
-    return
-    address.slice(0,6)
-    + "..."
-    + address.slice(-4);
-}
-
-/* RENDER LEADERBOARD */
-
-function renderLeaderboard(){
-
-    leaderboardTable.innerHTML = "";
-
-    leaderboard
-    .sort((a,b)=>b.score-a.score)
-    .slice(0,7)
-    .forEach((item,index)=>{
-
-        const row =
-        document.createElement("div");
-
-        row.className =
-        "leader-row";
-
-        row.innerHTML = `
-
-        <div class="leader-rank">
-        ${index+1}.
-        </div>
-
-        <div class="leader-address">
-        ${shortAddress(item.wallet)}
-        </div>
-
-        <div class="leader-score">
-        ${item.score}
-        </div>
-
-        `;
-
-        leaderboardTable.appendChild(row);
-    });
-}
-
-renderLeaderboard();
-
-/* BOARD */
-
 function resetBoard(){
-
     board = [];
 
     for(let y=0;y<ROWS;y++){
-
-        board[y] = [];
+        board[y]=[];
 
         for(let x=0;x<COLS;x++){
-
-            board[y][x] = 0;
+            board[y][x]=0;
         }
     }
 }
@@ -468,20 +277,12 @@ function resetBoard(){
 resetBoard();
 
 function randomPiece(){
-
     const shape =
-    PIECES[
-        Math.floor(
-            Math.random() * PIECES.length
-        )
-    ];
+      PIECES[Math.floor(Math.random()*PIECES.length)];
 
     return {
-
         shape,
-
         x:3,
-
         y:0
     };
 }
@@ -489,40 +290,29 @@ function randomPiece(){
 let piece = randomPiece();
 
 function drawBlock(x,y,color){
-
-    ctx.fillStyle = color;
+    ctx.fillStyle=color;
 
     ctx.fillRect(
-        x * BLOCK,
-        y * BLOCK,
-        BLOCK - 1,
-        BLOCK - 1
+      x*BLOCK,
+      y*BLOCK,
+      BLOCK-1,
+      BLOCK-1
     );
 }
 
 function draw(){
 
-    ctx.clearRect(
-        0,
-        0,
-        canvas.width,
-        canvas.height
-    );
+    ctx.clearRect(0,0,canvas.width,canvas.height);
 
     for(let y=0;y<ROWS;y++){
-
         for(let x=0;x<COLS;x++){
 
             drawBlock(
-
-                x,
-
-                y,
-
-                board[y][x]
-                ? '#27ffb2'
-                : '#222'
+              x,
+              y,
+              board[y][x] ? '#25ffb5' : '#222'
             );
+
         }
     }
 
@@ -533,16 +323,17 @@ function draw(){
             if(value){
 
                 drawBlock(
-
-                    piece.x + px,
-
-                    piece.y + py,
-
-                    '#ff00ff'
+                  piece.x+px,
+                  piece.y+py,
+                  '#ff00ff'
                 );
+
             }
+
         });
+
     });
+
 }
 
 function collide(nx,ny,shape){
@@ -556,22 +347,18 @@ function collide(nx,ny,shape){
                 let x = nx + px;
                 let y = ny + py;
 
-                if(
-                    x < 0 ||
-                    x >= COLS ||
-                    y >= ROWS
-                ){
+                if(x<0 || x>=COLS || y>=ROWS){
                     return true;
                 }
 
-                if(
-                    y >= 0 &&
-                    board[y][x]
-                ){
+                if(y>=0 && board[y][x]){
                     return true;
                 }
+
             }
+
         }
+
     }
 
     return false;
@@ -585,47 +372,39 @@ function merge(){
 
             if(value){
 
-                board[
-                    piece.y + py
-                ][
-                    piece.x + px
-                ] = 1;
+                board[piece.y+py][piece.x+px]=1;
+
             }
+
         });
+
     });
 
     clearLines();
 
     piece = randomPiece();
 
-    if(
-        collide(
-            piece.x,
-            piece.y,
-            piece.shape
-        )
-    ){
+    if(collide(piece.x,piece.y,piece.shape)){
         endGame();
     }
 }
 
 function clearLines(){
 
-    let lines = 0;
+    let lines=0;
 
     outer:
     for(let y=ROWS-1;y>=0;y--){
 
         for(let x=0;x<COLS;x++){
 
-            if(board[y][x] === 0){
-
+            if(board[y][x]===0){
                 continue outer;
             }
+
         }
 
-        const row =
-        board.splice(y,1)[0].fill(0);
+        const row = board.splice(y,1)[0].fill(0);
 
         board.unshift(row);
 
@@ -634,115 +413,110 @@ function clearLines(){
         y++;
     }
 
-    if(lines > 0){
+    if(lines>0){
 
         score += lines * 100;
 
         scoreEl.innerText =
-        `Score: ${score}`;
+          `Score: ${score}`;
+
     }
 }
 
 function rotate(shape){
 
     return shape[0].map((_,i)=>
-
-        shape
-        .map(row=>row[i])
-        .reverse()
+        shape.map(row=>row[i]).reverse()
     );
 }
 
 function update(){
 
-    if(gameOver) return;
+    if(gameOver || !gameStarted) return;
 
-    if(!gameStarted) return;
-
-    if(
-        !collide(
-            piece.x,
-            piece.y + 1,
-            piece.shape
-        )
-    ){
-
+    if(!collide(
+        piece.x,
+        piece.y+1,
+        piece.shape
+    )){
         piece.y++;
     }
     else{
-
         merge();
     }
 
     draw();
 }
 
-setInterval(update,500);
+function startGame(){
 
-document.addEventListener(
-'keydown',
-(e)=>{
+    if(gameStarted) return;
 
-    if(gameOver) return;
+    gameStarted = true;
 
-    if(!gameStarted) return;
+    statusEl.innerHTML = "Game started";
 
-    if(e.key === 'ArrowLeft'){
+    if(!gameInterval){
+        gameInterval = setInterval(update,500);
+    }
+}
 
-        if(
-            !collide(
-                piece.x - 1,
-                piece.y,
-                piece.shape
-            )
-        ){
+document.getElementById("startBtn")
+.addEventListener("click",startGame);
+
+document.addEventListener('keydown',(e)=>{
+
+    if(gameOver || !gameStarted) return;
+
+    if(e.key==='ArrowLeft'){
+
+        if(!collide(
+          piece.x-1,
+          piece.y,
+          piece.shape
+        )){
             piece.x--;
         }
     }
 
-    if(e.key === 'ArrowRight'){
+    if(e.key==='ArrowRight'){
 
-        if(
-            !collide(
-                piece.x + 1,
-                piece.y,
-                piece.shape
-            )
-        ){
+        if(!collide(
+          piece.x+1,
+          piece.y,
+          piece.shape
+        )){
             piece.x++;
         }
     }
 
-    if(e.key === 'ArrowDown'){
+    if(e.key==='ArrowDown'){
 
-        if(
-            !collide(
-                piece.x,
-                piece.y + 1,
-                piece.shape
-            )
-        ){
+        if(!collide(
+          piece.x,
+          piece.y+1,
+          piece.shape
+        )){
             piece.y++;
         }
     }
 
-    if(e.key === 'ArrowUp'){
+    if(e.key==='ArrowUp'){
 
         const rotated =
-        rotate(piece.shape);
+          rotate(piece.shape);
 
-        if(
-            !collide(
-                piece.x,
-                piece.y,
-                rotated
-            )
-        ){
+        if(!collide(
+          piece.x,
+          piece.y,
+          rotated
+        )){
             piece.shape = rotated;
         }
     }
 
     draw();
+
 });
 
 function endGame(){
@@ -750,168 +524,183 @@ function endGame(){
     gameOver = true;
 
     statusEl.innerHTML =
-    'Game Over — submit your score to Ritual testnet';
+      "Game Over — submit your score";
+
 }
-
-/* START */
-
-document
-.getElementById("startBtn")
-.addEventListener("click",()=>{
-
-    if(gameStarted) return;
-
-    gameStarted = true;
-
-    statusEl.innerHTML =
-    'Game started';
-});
-
-/* CONNECT */
 
 async function connectWallet(){
 
-    if(!window.ethereum){
-
-        alert("Install MetaMask");
-
-        return null;
-    }
-
     try{
 
-        await window.ethereum.request({
+        if(!window.ethereum){
 
+            alert("Install MetaMask");
+
+            return null;
+        }
+
+        const accounts =
+          await window.ethereum.request({
             method:'eth_requestAccounts'
-        });
+          });
 
-        const provider =
-        new ethers.BrowserProvider(
-            window.ethereum
-        );
+        connectedWallet = accounts[0];
 
-        const signer =
-        await provider.getSigner();
+        walletBtn.innerText =
+          connectedWallet.slice(0,6)
+          + "..."
+          + connectedWallet.slice(-4);
 
-        const address =
-        await signer.getAddress();
-
-        currentWallet = address;
-
-        walletConnected = true;
-
-        connectBtn.innerHTML =
-        shortAddress(address);
-
-        statusEl.innerHTML =
-        'Wallet connected';
-
-        return signer;
+        return connectedWallet;
 
     }catch(err){
 
         console.log(err);
 
-        statusEl.innerHTML =
-        'Wallet connection failed';
-
-        return null;
     }
 }
 
-document
-.getElementById("connectBtn")
-.addEventListener(
-"click",
-async()=>{
-
-    await connectWallet();
-});
-
-/* SUBMIT SCORE */
+walletBtn.addEventListener(
+  "click",
+  connectWallet
+);
 
 async function submitScore(){
 
     try{
 
-        if(!walletConnected){
-
-            alert(
-                "Connect wallet first"
-            );
-
-            return;
-        }
-
         statusEl.innerHTML =
-        'Preparing transaction...';
+          "Connecting wallet...";
 
         const provider =
-        new ethers.BrowserProvider(
-            window.ethereum
-        );
+          new ethers.BrowserProvider(window.ethereum);
 
         const signer =
-        await provider.getSigner();
+          await provider.getSigner();
 
         const contract =
-        new ethers.Contract(
-
+          new ethers.Contract(
             CONTRACT_ADDRESS,
-
             ABI,
-
             signer
-        );
+          );
 
         statusEl.innerHTML =
-        'Confirm transaction in MetaMask...';
+          "Sign transaction...";
 
         const tx =
-        await contract.submitScore(score);
+          await contract.submitScore(score);
 
         statusEl.innerHTML =
-        'Sending transaction...';
+          "Sending transaction...";
 
         await tx.wait();
 
-        /* SAVE TO LEADERBOARD */
-
-        leaderboard.push({
-
-            wallet: currentWallet,
-
-            score: score
-        });
-
-        localStorage.setItem(
-
-            "ritualLeaderboard",
-
-            JSON.stringify(leaderboard)
-        );
-
-        renderLeaderboard();
-
         statusEl.innerHTML =
-        `✅ Score submitted!`;
+          "Score submitted!";
+
+        loadLeaderboard();
 
     }catch(err){
 
         console.error(err);
 
         statusEl.innerHTML =
-        '❌ Transaction rejected';
+          "Transaction rejected";
+
     }
 }
 
-submitBtn
-.addEventListener(
-'click',
-submitScore
+submitBtn.addEventListener(
+  "click",
+  submitScore
 );
 
+async function loadLeaderboard(){
+
+    try{
+
+        const provider =
+          new ethers.JsonRpcProvider(
+            "https://testnet.ritual.net"
+          );
+
+        const contract =
+          new ethers.Contract(
+            CONTRACT_ADDRESS,
+            ABI,
+            provider
+          );
+
+        const events =
+          await contract.queryFilter(
+            "ScoreSubmitted"
+          );
+
+        const bestScores = {};
+
+        events.forEach(event=>{
+
+            const player = event.args.player;
+            const points =
+              Number(event.args.points);
+
+            if(
+              !bestScores[player] ||
+              points > bestScores[player]
+            ){
+                bestScores[player] = points;
+            }
+
+        });
+
+        const sorted =
+          Object.entries(bestScores)
+          .sort((a,b)=>b[1]-a[1])
+          .slice(0,7);
+
+        leaderboardRows.innerHTML = "";
+
+        for(let i=0;i<7;i++){
+
+            const row =
+              document.createElement("div");
+
+            row.className = "lbRow";
+
+            let wallet = "---";
+            let points = "---";
+
+            if(sorted[i]){
+
+                wallet =
+                  sorted[i][0].slice(0,6)
+                  + "..."
+                  + sorted[i][0].slice(-4);
+
+                points = sorted[i][1];
+
+            }
+
+            row.innerHTML = `
+              <div class="rank">${i+1}.</div>
+              <div class="wallet">${wallet}</div>
+              <div class="points">${points}</div>
+            `;
+
+            leaderboardRows.appendChild(row);
+        }
+
+    }catch(err){
+
+        console.error(err);
+
+    }
+}
+
 draw();
+
+loadLeaderboard();
 
 </script>
 
