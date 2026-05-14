@@ -10,167 +10,146 @@
 
 <style>
 
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
 body{
-    margin:0;
-    overflow:hidden;
-    font-family:Arial,sans-serif;
-    background:#e7d9b6;
-    background-image:
-      radial-gradient(circle at 20% 20%, rgba(255,255,255,0.3), transparent 20%),
-      radial-gradient(circle at 80% 30%, rgba(255,255,255,0.15), transparent 20%),
-      radial-gradient(circle at 40% 70%, rgba(255,255,255,0.15), transparent 20%);
+font-family:Arial,sans-serif;
+overflow:hidden;
+height:100vh;
+
+background:
+radial-gradient(circle at 20% 20%, rgba(255,255,255,0.35), transparent 25%),
+radial-gradient(circle at 80% 30%, rgba(255,255,255,0.2), transparent 20%),
+radial-gradient(circle at 40% 70%, rgba(255,255,255,0.15), transparent 20%),
+#d7c7a0;
+
+background-size:cover;
+display:flex;
+justify-content:center;
+align-items:flex-start;
 }
 
-/* LOGO */
-
-.logo{
-    position:absolute;
-    top:70px;
-    left:40px;
-    width:170px;
-    filter:drop-shadow(0 0 12px rgba(255,255,255,0.6));
+#logo{
+position:absolute;
+left:30px;
+top:60px;
+width:180px;
+opacity:0.95;
+filter:drop-shadow(0 0 10px rgba(255,255,255,0.7));
 }
-
-/* TOP BUTTONS */
 
 .topButtons{
-    position:absolute;
-    top:20px;
-    right:20px;
-    display:flex;
-    gap:15px;
+position:absolute;
+top:20px;
+right:20px;
+display:flex;
+gap:15px;
+z-index:20;
 }
 
-.topBtn{
-    background:#25ffb5;
-    border:2px solid #111;
-    color:#111;
-    font-size:22px;
-    font-weight:bold;
-    padding:14px 28px;
-    cursor:pointer;
-    box-shadow:0 0 12px rgba(37,255,181,0.5);
+.topButtons button{
+background:#2fffc3;
+border:none;
+padding:15px 30px;
+font-size:22px;
+font-weight:bold;
+cursor:pointer;
+color:black;
+box-shadow:0 0 10px rgba(0,0,0,0.2);
 }
 
-.topBtn:hover{
-    transform:scale(1.03);
+.gameArea{
+display:flex;
+flex-direction:column;
+align-items:center;
+padding-top:70px;
 }
 
-/* GAME AREA */
-
-.wrapper{
-    width:100%;
-    height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
+h1{
+font-size:72px;
+color:black;
+margin-bottom:10px;
+text-shadow:0 0 10px rgba(0,255,170,0.5);
 }
 
-.gameBox{
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-}
-
-.title{
-    font-size:72px;
-    color:#111;
-    margin-bottom:10px;
-    text-shadow:0 0 20px rgba(37,255,181,0.5);
-}
-
-.score{
-    font-size:42px;
-    color:white;
-    margin-bottom:20px;
-    text-shadow:0 0 10px rgba(0,0,0,0.6);
+#score{
+font-size:34px;
+color:white;
+margin-bottom:20px;
+text-shadow:0 0 10px black;
 }
 
 canvas{
-    background:#1b1b1b;
-    border:4px solid #25ffb5;
-    box-shadow:0 0 20px rgba(37,255,181,0.6);
+background:#1b1b1b;
+border:3px solid #2fffc3;
+box-shadow:0 0 20px rgba(0,255,170,0.7);
 }
 
-.submitBtn{
-    margin-top:20px;
-    background:#25ffb5;
-    border:2px solid #111;
-    color:#111;
-    font-size:24px;
-    font-weight:bold;
-    padding:14px 40px;
-    cursor:pointer;
-    width:320px;
-}
-
-.submitBtn:hover{
-    transform:scale(1.02);
+#submitBtn{
+margin-top:18px;
+background:#2fffc3;
+border:none;
+padding:18px 60px;
+font-size:28px;
+font-weight:bold;
+cursor:pointer;
+color:black;
 }
 
 #status{
-    margin-top:15px;
-    color:#333;
-    font-size:18px;
-    text-align:center;
-}
-
-/* LEADERBOARD */
-
-.leaderboard{
-    position:absolute;
-    right:60px;
-    top:150px;
-    width:350px;
-}
-
-.lbTitle{
-    font-size:64px;
-    color:white;
-    margin-bottom:10px;
-    text-shadow:0 0 10px rgba(0,0,0,0.5);
-}
-
-.lbRow{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding:14px 18px;
-    font-size:28px;
-    border:2px solid #222;
-    color:white;
-}
-
-.lbRow:nth-child(1),
-.lbRow:nth-child(2),
-.lbRow:nth-child(3){
-    background:#e786e7;
-}
-
-.lbRow:nth-child(n+4){
-    background:#84dfdf;
-}
-
-.rank{
-    width:40px;
-}
-
-.wallet{
-    flex:1;
-    margin-left:10px;
-}
-
-.points{
-    font-weight:bold;
+margin-top:10px;
+color:black;
+font-size:18px;
+font-weight:bold;
+height:30px;
 }
 
 .footer{
-    position:absolute;
-    left:20px;
-    bottom:20px;
-    color:#7d6f77;
-    font-size:18px;
-    font-weight:bold;
+position:absolute;
+left:20px;
+bottom:20px;
+font-size:22px;
+font-weight:bold;
+color:#b59696;
+}
+
+@media(max-width:900px){
+
+body{
+overflow:auto;
+padding-bottom:40px;
+}
+
+h1{
+font-size:50px;
+}
+
+#logo{
+width:120px;
+left:15px;
+top:40px;
+}
+
+.topButtons{
+right:10px;
+top:10px;
+gap:10px;
+}
+
+.topButtons button{
+padding:10px 15px;
+font-size:16px;
+}
+
+#submitBtn{
+font-size:22px;
+padding:15px 35px;
+}
+
 }
 
 </style>
@@ -178,62 +157,59 @@ canvas{
 
 <body>
 
-<img src="logo.png" class="logo">
+<img id="logo" src="logo.png"/>
 
 <div class="topButtons">
-    <button class="topBtn" id="startBtn">Start</button>
-    <button class="topBtn" id="walletBtn">Wallet Connect</button>
-</div>
 
-<div class="wrapper">
+<button id="startBtn">
+Start
+</button>
 
-    <div class="gameBox">
-
-        <div class="title">Ritual Tetris</div>
-
-        <div class="score" id="score">Score: 0</div>
-
-        <canvas id="game" width="300" height="600"></canvas>
-
-        <button class="submitBtn" id="submitBtn">
-            Submit score
-        </button>
-
-        <div id="status"></div>
-
-    </div>
+<button id="connectBtn">
+Wallet Connect
+</button>
 
 </div>
 
-<div class="leaderboard">
+<div class="gameArea">
 
-    <div class="lbTitle">Leaderboard</div>
+<h1>Ritual Tetris</h1>
 
-    <div id="leaderboardRows"></div>
+<div id="score">
+Score: 0
+</div>
+
+<canvas id="game" width="300" height="600"></canvas>
+
+<button id="submitBtn">
+Submit score
+</button>
+
+<div id="status"></div>
 
 </div>
 
 <div class="footer">
-    Made by PinkDreams
+Made by PinkDreams
 </div>
 
 <script>
-
-const CONTRACT_ADDRESS = "0x1cb429c5D7Bbfc4C905d745c84b008Ea528d75f4";
-
-const ABI = [
-  "function submitScore(uint256 points) external",
-  "event ScoreSubmitted(address indexed player, uint256 points)"
-];
 
 const canvas = document.getElementById("game");
 const ctx = canvas.getContext("2d");
 
 const scoreEl = document.getElementById("score");
-const submitBtn = document.getElementById("submitBtn");
 const statusEl = document.getElementById("status");
-const walletBtn = document.getElementById("walletBtn");
-const leaderboardRows = document.getElementById("leaderboardRows");
+
+const startBtn = document.getElementById("startBtn");
+const connectBtn = document.getElementById("connectBtn");
+const submitBtn = document.getElementById("submitBtn");
+
+const CONTRACT_ADDRESS = "0x1cb429c5D7Bbfc4C905d745c84b008Ea528d75f4";
+
+const ABI = [
+"function submitScore(uint256 points) external"
+];
 
 const COLS = 10;
 const ROWS = 20;
@@ -241,484 +217,420 @@ const BLOCK = 30;
 
 let board = [];
 let score = 0;
-let gameOver = false;
 let gameStarted = false;
-let gameInterval = null;
+let gameOver = false;
+let gameLoop = null;
+
+let currentWallet = null;
 
 const PIECES = [
- [[1,1],[1,1]],
- [[1,1,1,1]],
- [[1,1,1],[0,1,0]],
- [[1,1,0],[0,1,1]],
- [[0,1,1],[1,1,0]],
- [[1,1,1],[1,0,0]],
- [[1,1,1],[0,0,1]]
+
+[[1,1],[1,1]],
+
+[[1,1,1,1]],
+
+[[1,1,1],[0,1,0]],
+
+[[1,1,0],[0,1,1]],
+
+[[0,1,1],[1,1,0]],
+
+[[1,1,1],[1,0,0]],
+
+[[1,1,1],[0,0,1]]
+
 ];
+
+function formatWallet(address){
+
+if(!address) return "Wallet Connect";
+
+return address.slice(0,6) + "..." + address.slice(-4);
+}
 
 function resetBoard(){
 
-    board=[];
+board = [];
 
-    for(let y=0;y<ROWS;y++){
+for(let y=0;y<ROWS;y++){
 
-        board[y]=[];
+board[y] = [];
 
-        for(let x=0;x<COLS;x++){
+for(let x=0;x<COLS;x++){
 
-            board[y][x]=0;
+board[y][x] = 0;
 
-        }
-    }
+}
+
+}
+
 }
 
 resetBoard();
 
 function randomPiece(){
 
-    const shape =
-      PIECES[Math.floor(Math.random()*PIECES.length)];
+const shape = PIECES[Math.floor(Math.random()*PIECES.length)];
 
-    return {
-        shape,
-        x:3,
-        y:0
-    };
+return{
+shape,
+x:3,
+y:0
+};
+
 }
 
 let piece = randomPiece();
 
 function drawBlock(x,y,color){
 
-    ctx.fillStyle=color;
+ctx.fillStyle = color;
 
-    ctx.fillRect(
-      x*BLOCK,
-      y*BLOCK,
-      BLOCK-1,
-      BLOCK-1
-    );
+ctx.fillRect(
+x*BLOCK,
+y*BLOCK,
+BLOCK-1,
+BLOCK-1
+);
+
 }
 
 function draw(){
 
-    ctx.clearRect(0,0,canvas.width,canvas.height);
+ctx.clearRect(0,0,canvas.width,canvas.height);
 
-    for(let y=0;y<ROWS;y++){
+for(let y=0;y<ROWS;y++){
 
-        for(let x=0;x<COLS;x++){
+for(let x=0;x<COLS;x++){
 
-            drawBlock(
-              x,
-              y,
-              board[y][x] ? '#25ffb5' : '#222'
-            );
+drawBlock(
+x,
+y,
+board[y][x] ? '#2fffc3' : '#222'
+);
 
-        }
-    }
+}
 
-    piece.shape.forEach((row,py)=>{
+}
 
-        row.forEach((value,px)=>{
+piece.shape.forEach((row,py)=>{
 
-            if(value){
+row.forEach((value,px)=>{
 
-                drawBlock(
-                  piece.x+px,
-                  piece.y+py,
-                  '#ff00ff'
-                );
+if(value){
 
-            }
+drawBlock(
+piece.x+px,
+piece.y+py,
+'#ff00ff'
+);
 
-        });
+}
 
-    });
+});
+
+});
 
 }
 
 function collide(nx,ny,shape){
 
-    for(let py=0;py<shape.length;py++){
+for(let py=0;py<shape.length;py++){
 
-        for(let px=0;px<shape[py].length;px++){
+for(let px=0;px<shape[py].length;px++){
 
-            if(shape[py][px]){
+if(shape[py][px]){
 
-                let x = nx + px;
-                let y = ny + py;
+let x = nx + px;
+let y = ny + py;
 
-                if(x<0 || x>=COLS || y>=ROWS){
-                    return true;
-                }
+if(x < 0 || x >= COLS || y >= ROWS){
 
-                if(y>=0 && board[y][x]){
-                    return true;
-                }
+return true;
 
-            }
-        }
-    }
+}
 
-    return false;
+if(y >= 0 && board[y][x]){
+
+return true;
+
+}
+
+}
+
+}
+
+}
+
+return false;
+
 }
 
 function merge(){
 
-    piece.shape.forEach((row,py)=>{
+piece.shape.forEach((row,py)=>{
 
-        row.forEach((value,px)=>{
+row.forEach((value,px)=>{
 
-            if(value){
+if(value){
 
-                board[piece.y+py][piece.x+px]=1;
+board[piece.y+py][piece.x+px] = 1;
 
-            }
+}
 
-        });
+});
 
-    });
+});
 
-    clearLines();
+clearLines();
 
-    piece = randomPiece();
+piece = randomPiece();
 
-    if(collide(piece.x,piece.y,piece.shape)){
+if(collide(piece.x,piece.y,piece.shape)){
 
-        endGame();
+endGame();
 
-    }
+}
+
 }
 
 function clearLines(){
 
-    let lines=0;
+let lines = 0;
 
-    outer:
-    for(let y=ROWS-1;y>=0;y--){
+outer:
 
-        for(let x=0;x<COLS;x++){
+for(let y=ROWS-1;y>=0;y--){
 
-            if(board[y][x]===0){
+for(let x=0;x<COLS;x++){
 
-                continue outer;
+if(board[y][x] === 0){
 
-            }
-        }
+continue outer;
 
-        const row =
-          board.splice(y,1)[0].fill(0);
+}
 
-        board.unshift(row);
+}
 
-        lines++;
+const row = board.splice(y,1)[0].fill(0);
 
-        y++;
-    }
+board.unshift(row);
 
-    if(lines>0){
+lines++;
 
-        score += lines*100;
+y++;
 
-        scoreEl.innerText =
-          `Score: ${score}`;
+}
 
-    }
+if(lines > 0){
+
+score += lines * 100;
+
+scoreEl.innerText = `Score: ${score}`;
+
+}
+
 }
 
 function rotate(shape){
 
-    return shape[0].map((_,i)=>
-        shape.map(row=>row[i]).reverse()
-    );
+return shape[0].map((_,i)=>
+shape.map(row=>row[i]).reverse()
+);
+
 }
 
 function update(){
 
-    if(gameOver || !gameStarted) return;
+if(gameOver || !gameStarted) return;
 
-    if(!collide(
-      piece.x,
-      piece.y+1,
-      piece.shape
-    )){
-        piece.y++;
-    }
-    else{
-        merge();
-    }
+if(!collide(piece.x,piece.y+1,piece.shape)){
 
-    draw();
+piece.y++;
+
+}else{
+
+merge();
+
+}
+
+draw();
+
 }
 
 function startGame(){
 
-    if(gameStarted) return;
+resetBoard();
 
-    gameStarted=true;
+score = 0;
 
-    statusEl.innerHTML="Game started";
+scoreEl.innerText = "Score: 0";
 
-    if(!gameInterval){
+piece = randomPiece();
 
-        gameInterval =
-          setInterval(update,500);
+gameStarted = true;
 
-    }
+gameOver = false;
+
+statusEl.innerHTML = "";
+
+draw();
+
+if(gameLoop){
+
+clearInterval(gameLoop);
+
 }
 
-document.getElementById("startBtn")
-.addEventListener("click",startGame);
+gameLoop = setInterval(update,500);
 
-document.addEventListener('keydown',(e)=>{
+}
 
-    if(gameOver || !gameStarted) return;
+startBtn.addEventListener("click",startGame);
 
-    if(e.key==='ArrowLeft'){
+document.addEventListener("keydown",(e)=>{
 
-        if(!collide(
-          piece.x-1,
-          piece.y,
-          piece.shape
-        )){
-            piece.x--;
-        }
-    }
+if(!gameStarted || gameOver) return;
 
-    if(e.key==='ArrowRight'){
+if(e.key === "ArrowLeft"){
 
-        if(!collide(
-          piece.x+1,
-          piece.y,
-          piece.shape
-        )){
-            piece.x++;
-        }
-    }
+if(!collide(piece.x-1,piece.y,piece.shape)){
 
-    if(e.key==='ArrowDown'){
+piece.x--;
 
-        if(!collide(
-          piece.x,
-          piece.y+1,
-          piece.shape
-        )){
-            piece.y++;
-        }
-    }
+}
 
-    if(e.key==='ArrowUp'){
+}
 
-        const rotated =
-          rotate(piece.shape);
+if(e.key === "ArrowRight"){
 
-        if(!collide(
-          piece.x,
-          piece.y,
-          rotated
-        )){
-            piece.shape = rotated;
-        }
-    }
+if(!collide(piece.x+1,piece.y,piece.shape)){
 
-    draw();
+piece.x++;
+
+}
+
+}
+
+if(e.key === "ArrowDown"){
+
+if(!collide(piece.x,piece.y+1,piece.shape)){
+
+piece.y++;
+
+}
+
+}
+
+if(e.key === "ArrowUp"){
+
+const rotated = rotate(piece.shape);
+
+if(!collide(piece.x,piece.y,rotated)){
+
+piece.shape = rotated;
+
+}
+
+}
+
+draw();
 
 });
 
 function endGame(){
 
-    gameOver=true;
+gameOver = true;
 
-    statusEl.innerHTML =
-      "Game Over — submit your score";
+clearInterval(gameLoop);
+
+statusEl.innerHTML = "Game Over";
 
 }
-
-/* WALLET CONNECT FIX */
 
 async function connectWallet(){
 
-    try{
+if(!window.ethereum){
 
-        if(!window.ethereum){
+alert("Install MetaMask");
 
-            alert("Install MetaMask");
+return;
 
-            return;
-        }
-
-        const provider =
-          new ethers.BrowserProvider(window.ethereum);
-
-        await provider.send(
-          "eth_requestAccounts",
-          []
-        );
-
-        const signer =
-          await provider.getSigner();
-
-        const address =
-          await signer.getAddress();
-
-        walletBtn.innerText =
-          address.slice(0,6)
-          + "..."
-          + address.slice(-4);
-
-        statusEl.innerHTML =
-          "Wallet connected";
-
-    }catch(err){
-
-        console.error(err);
-
-        statusEl.innerHTML =
-          "Wallet connection error";
-
-    }
 }
 
-walletBtn.addEventListener(
-  "click",
-  connectWallet
-);
+try{
+
+await window.ethereum.request({
+method:"eth_requestAccounts"
+});
+
+const provider = new ethers.BrowserProvider(window.ethereum);
+
+const signer = await provider.getSigner();
+
+currentWallet = await signer.getAddress();
+
+connectBtn.innerText = formatWallet(currentWallet);
+
+statusEl.innerHTML = "Wallet connected";
+
+}catch(err){
+
+console.log(err);
+
+statusEl.innerHTML = "Wallet connection failed";
+
+}
+
+}
+
+connectBtn.addEventListener("click",connectWallet);
 
 async function submitScore(){
 
-    try{
+try{
 
-        const provider =
-          new ethers.BrowserProvider(window.ethereum);
+if(!window.ethereum){
 
-        const signer =
-          await provider.getSigner();
+alert("Install MetaMask");
 
-        const contract =
-          new ethers.Contract(
-            CONTRACT_ADDRESS,
-            ABI,
-            signer
-          );
+return;
 
-        statusEl.innerHTML =
-          "Sign transaction...";
-
-        const tx =
-          await contract.submitScore(score);
-
-        statusEl.innerHTML =
-          "Sending transaction...";
-
-        await tx.wait();
-
-        statusEl.innerHTML =
-          "Score submitted successfully";
-
-        loadLeaderboard();
-
-    }catch(err){
-
-        console.error(err);
-
-        statusEl.innerHTML =
-          "Transaction rejected";
-
-    }
 }
 
-submitBtn.addEventListener(
-  "click",
-  submitScore
+statusEl.innerHTML = "Submitting transaction...";
+
+const provider = new ethers.BrowserProvider(window.ethereum);
+
+const signer = await provider.getSigner();
+
+const contract = new ethers.Contract(
+CONTRACT_ADDRESS,
+ABI,
+signer
 );
 
-async function loadLeaderboard(){
+const tx = await contract.submitScore(score);
 
-    try{
+statusEl.innerHTML = "Waiting confirmation...";
 
-        const provider =
-          new ethers.JsonRpcProvider(
-            "https://testnet.ritual.net"
-          );
+await tx.wait();
 
-        const contract =
-          new ethers.Contract(
-            CONTRACT_ADDRESS,
-            ABI,
-            provider
-          );
+statusEl.innerHTML = "Score submitted successfully";
 
-        const events =
-          await contract.queryFilter(
-            "ScoreSubmitted"
-          );
+}catch(err){
 
-        const bestScores = {};
+console.log(err);
 
-        events.forEach(event=>{
+statusEl.innerHTML = "Transaction failed";
 
-            const player =
-              event.args.player;
-
-            const points =
-              Number(event.args.points);
-
-            if(
-              !bestScores[player] ||
-              points > bestScores[player]
-            ){
-                bestScores[player]=points;
-            }
-
-        });
-
-        const sorted =
-          Object.entries(bestScores)
-          .sort((a,b)=>b[1]-a[1])
-          .slice(0,7);
-
-        leaderboardRows.innerHTML="";
-
-        for(let i=0;i<7;i++){
-
-            const row =
-              document.createElement("div");
-
-            row.className="lbRow";
-
-            let wallet="---";
-            let points="---";
-
-            if(sorted[i]){
-
-                wallet =
-                  sorted[i][0].slice(0,6)
-                  + "..."
-                  + sorted[i][0].slice(-4);
-
-                points =
-                  sorted[i][1];
-
-            }
-
-            row.innerHTML = `
-              <div class="rank">${i+1}.</div>
-              <div class="wallet">${wallet}</div>
-              <div class="points">${points}</div>
-            `;
-
-            leaderboardRows.appendChild(row);
-        }
-
-    }catch(err){
-
-        console.error(err);
-
-    }
 }
 
-draw();
+}
 
-loadLeaderboard();
+submitBtn.addEventListener("click",submitScore);
+
+draw();
 
 </script>
 
