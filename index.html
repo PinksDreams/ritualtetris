@@ -13,13 +13,10 @@
 body{
     margin:0;
     overflow:hidden;
-
     font-family:Arial,sans-serif;
-
     display:flex;
     flex-direction:column;
     align-items:center;
-
     min-height:100vh;
 
     background:
@@ -30,11 +27,8 @@ body{
 }
 
 body::before{
-
     content:"";
-
     position:fixed;
-
     inset:0;
 
     background-image:
@@ -52,30 +46,20 @@ body::before{
 /* ЛОГО */
 
 .logo{
-
     position:absolute;
-
     left:35px;
-
     top:35px;
-
     width:180px;
-
     z-index:20;
 }
 
-/* ВЕРХНИЕ КНОПКИ */
+/* TOPBAR */
 
 .topbar{
-
     position:absolute;
-
     top:20px;
-
     right:20px;
-
     display:flex;
-
     gap:14px;
 }
 
@@ -96,38 +80,30 @@ body::before{
     color:black;
 
     transition:0.2s;
+
+    min-width:220px;
 }
 
 .topbar button:hover{
-
     transform:scale(1.05);
 }
 
 /* TITLE */
 
 h1{
-
     margin-top:40px;
-
     margin-bottom:5px;
-
     font-size:58px;
-
     color:black;
-
     font-weight:bold;
-
     letter-spacing:1px;
 }
 
 /* SCORE */
 
 #score{
-
     color:white;
-
     font-size:30px;
-
     margin-bottom:12px;
 
     text-shadow:
@@ -170,7 +146,6 @@ canvas{
 }
 
 #submitBtn:hover{
-
     transform:scale(1.04);
 }
 
@@ -209,19 +184,96 @@ canvas{
     font-weight:bold;
 }
 
+/* LEADERBOARD */
+
+.leaderboard{
+
+    position:absolute;
+
+    right:30px;
+
+    top:120px;
+
+    width:360px;
+}
+
+.leaderboard h2{
+
+    margin:0 0 10px 0;
+
+    font-size:62px;
+
+    color:white;
+
+    text-shadow:
+    0 0 12px rgba(0,0,0,0.5);
+}
+
+.leaderboard-table{
+
+    border:2px solid black;
+}
+
+.leader-row{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:14px 18px;
+
+    font-size:28px;
+
+    border-bottom:2px solid black;
+
+    color:white;
+
+    text-shadow:
+    0 0 10px rgba(255,255,255,0.7);
+}
+
+.leader-row:nth-child(1),
+.leader-row:nth-child(2),
+.leader-row:nth-child(3){
+
+    background:#eb8de6;
+}
+
+.leader-row:nth-child(n+4){
+
+    background:#8be3e0;
+}
+
+.leader-rank{
+    font-weight:bold;
+}
+
+.leader-address{
+    flex:1;
+    text-align:center;
+}
+
+.leader-score{
+    font-weight:bold;
+}
+
 </style>
 </head>
 
 <body>
 
 <!-- ЛОГО -->
+
 <img
 class="logo"
 src="./logo.png"
 alt="logo"
 >
 
-<!-- КНОПКИ -->
+<!-- TOP BUTTONS -->
+
 <div class="topbar">
 
     <button id="startBtn">
@@ -234,26 +286,46 @@ alt="logo"
 
 </div>
 
+<!-- LEADERBOARD -->
+
+<div class="leaderboard">
+
+    <h2>Leaderboard</h2>
+
+    <div
+    class="leaderboard-table"
+    id="leaderboardTable">
+
+    </div>
+
+</div>
+
 <!-- TITLE -->
+
 <h1>Ritual Tetris</h1>
 
 <!-- SCORE -->
+
 <div id="score">
     Score: 0
 </div>
 
 <!-- GAME -->
+
 <canvas id="game" width="300" height="600"></canvas>
 
 <!-- SUBMIT -->
+
 <button id="submitBtn">
     Submit score
 </button>
 
 <!-- STATUS -->
+
 <div id="status"></div>
 
 <!-- CREDIT -->
+
 <div class="credit">
     Made by PinkDreams
 </div>
@@ -277,6 +349,13 @@ let gameOver = false;
 let gameStarted = false;
 let walletConnected = false;
 
+let currentWallet = "";
+
+const leaderboardTable =
+document.getElementById(
+"leaderboardTable"
+);
+
 const scoreEl =
 document.getElementById("score");
 
@@ -285,6 +364,9 @@ document.getElementById("submitBtn");
 
 const statusEl =
 document.getElementById("status");
+
+const connectBtn =
+document.getElementById("connectBtn");
 
 const CONTRACT_ADDRESS =
 "0x1cb429c5D7Bbfc4C905d745c84b008Ea528d75f4";
@@ -309,6 +391,64 @@ const PIECES = [
 
   [[1,1,1],[0,0,1]]
 ];
+
+/* LEADERBOARD STORAGE */
+
+let leaderboard =
+JSON.parse(
+localStorage.getItem("ritualLeaderboard")
+) || [];
+
+/* SHORT ADDRESS */
+
+function shortAddress(address){
+
+    return
+    address.slice(0,6)
+    + "..."
+    + address.slice(-4);
+}
+
+/* RENDER LEADERBOARD */
+
+function renderLeaderboard(){
+
+    leaderboardTable.innerHTML = "";
+
+    leaderboard
+    .sort((a,b)=>b.score-a.score)
+    .slice(0,7)
+    .forEach((item,index)=>{
+
+        const row =
+        document.createElement("div");
+
+        row.className =
+        "leader-row";
+
+        row.innerHTML = `
+
+        <div class="leader-rank">
+        ${index+1}.
+        </div>
+
+        <div class="leader-address">
+        ${shortAddress(item.wallet)}
+        </div>
+
+        <div class="leader-score">
+        ${item.score}
+        </div>
+
+        `;
+
+        leaderboardTable.appendChild(row);
+    });
+}
+
+renderLeaderboard();
+
+/* BOARD */
 
 function resetBoard(){
 
@@ -613,6 +753,8 @@ function endGame(){
     'Game Over — submit your score to Ritual testnet';
 }
 
+/* START */
+
 document
 .getElementById("startBtn")
 .addEventListener("click",()=>{
@@ -624,6 +766,8 @@ document
     statusEl.innerHTML =
     'Game started';
 });
+
+/* CONNECT */
 
 async function connectWallet(){
 
@@ -649,7 +793,15 @@ async function connectWallet(){
         const signer =
         await provider.getSigner();
 
+        const address =
+        await signer.getAddress();
+
+        currentWallet = address;
+
         walletConnected = true;
+
+        connectBtn.innerHTML =
+        shortAddress(address);
 
         statusEl.innerHTML =
         'Wallet connected';
@@ -675,6 +827,8 @@ async()=>{
 
     await connectWallet();
 });
+
+/* SUBMIT SCORE */
 
 async function submitScore(){
 
@@ -721,8 +875,26 @@ async function submitScore(){
 
         await tx.wait();
 
+        /* SAVE TO LEADERBOARD */
+
+        leaderboard.push({
+
+            wallet: currentWallet,
+
+            score: score
+        });
+
+        localStorage.setItem(
+
+            "ritualLeaderboard",
+
+            JSON.stringify(leaderboard)
+        );
+
+        renderLeaderboard();
+
         statusEl.innerHTML =
-        `✅ Score submitted! TX: ${tx.hash}`;
+        `✅ Score submitted!`;
 
     }catch(err){
 
