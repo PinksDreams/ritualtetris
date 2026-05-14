@@ -141,13 +141,13 @@ canvas{
     color:white;
 }
 
+.lbRow:nth-child(1),
 .lbRow:nth-child(2),
-.lbRow:nth-child(3),
-.lbRow:nth-child(4){
+.lbRow:nth-child(3){
     background:#e786e7;
 }
 
-.lbRow:nth-child(n+5){
+.lbRow:nth-child(n+4){
     background:#84dfdf;
 }
 
@@ -178,16 +178,13 @@ canvas{
 
 <body>
 
-<!-- LOGO -->
 <img src="logo.png" class="logo">
 
-<!-- BUTTONS -->
 <div class="topButtons">
     <button class="topBtn" id="startBtn">Start</button>
     <button class="topBtn" id="walletBtn">Wallet Connect</button>
 </div>
 
-<!-- GAME -->
 <div class="wrapper">
 
     <div class="gameBox">
@@ -207,8 +204,6 @@ canvas{
     </div>
 
 </div>
-
-<!-- LEADERBOARD -->
 
 <div class="leaderboard">
 
@@ -250,8 +245,6 @@ let gameOver = false;
 let gameStarted = false;
 let gameInterval = null;
 
-let connectedWallet = null;
-
 const PIECES = [
  [[1,1],[1,1]],
  [[1,1,1,1]],
@@ -263,13 +256,17 @@ const PIECES = [
 ];
 
 function resetBoard(){
-    board = [];
+
+    board=[];
 
     for(let y=0;y<ROWS;y++){
+
         board[y]=[];
 
         for(let x=0;x<COLS;x++){
+
             board[y][x]=0;
+
         }
     }
 }
@@ -277,6 +274,7 @@ function resetBoard(){
 resetBoard();
 
 function randomPiece(){
+
     const shape =
       PIECES[Math.floor(Math.random()*PIECES.length)];
 
@@ -290,6 +288,7 @@ function randomPiece(){
 let piece = randomPiece();
 
 function drawBlock(x,y,color){
+
     ctx.fillStyle=color;
 
     ctx.fillRect(
@@ -305,6 +304,7 @@ function draw(){
     ctx.clearRect(0,0,canvas.width,canvas.height);
 
     for(let y=0;y<ROWS;y++){
+
         for(let x=0;x<COLS;x++){
 
             drawBlock(
@@ -356,9 +356,7 @@ function collide(nx,ny,shape){
                 }
 
             }
-
         }
-
     }
 
     return false;
@@ -385,7 +383,9 @@ function merge(){
     piece = randomPiece();
 
     if(collide(piece.x,piece.y,piece.shape)){
+
         endGame();
+
     }
 }
 
@@ -399,12 +399,14 @@ function clearLines(){
         for(let x=0;x<COLS;x++){
 
             if(board[y][x]===0){
-                continue outer;
-            }
 
+                continue outer;
+
+            }
         }
 
-        const row = board.splice(y,1)[0].fill(0);
+        const row =
+          board.splice(y,1)[0].fill(0);
 
         board.unshift(row);
 
@@ -415,7 +417,7 @@ function clearLines(){
 
     if(lines>0){
 
-        score += lines * 100;
+        score += lines*100;
 
         scoreEl.innerText =
           `Score: ${score}`;
@@ -435,9 +437,9 @@ function update(){
     if(gameOver || !gameStarted) return;
 
     if(!collide(
-        piece.x,
-        piece.y+1,
-        piece.shape
+      piece.x,
+      piece.y+1,
+      piece.shape
     )){
         piece.y++;
     }
@@ -452,12 +454,15 @@ function startGame(){
 
     if(gameStarted) return;
 
-    gameStarted = true;
+    gameStarted=true;
 
-    statusEl.innerHTML = "Game started";
+    statusEl.innerHTML="Game started";
 
     if(!gameInterval){
-        gameInterval = setInterval(update,500);
+
+        gameInterval =
+          setInterval(update,500);
+
     }
 }
 
@@ -521,12 +526,14 @@ document.addEventListener('keydown',(e)=>{
 
 function endGame(){
 
-    gameOver = true;
+    gameOver=true;
 
     statusEl.innerHTML =
       "Game Over — submit your score";
 
 }
+
+/* WALLET CONNECT FIX */
 
 async function connectWallet(){
 
@@ -536,26 +543,37 @@ async function connectWallet(){
 
             alert("Install MetaMask");
 
-            return null;
+            return;
         }
 
-        const accounts =
-          await window.ethereum.request({
-            method:'eth_requestAccounts'
-          });
+        const provider =
+          new ethers.BrowserProvider(window.ethereum);
 
-        connectedWallet = accounts[0];
+        await provider.send(
+          "eth_requestAccounts",
+          []
+        );
+
+        const signer =
+          await provider.getSigner();
+
+        const address =
+          await signer.getAddress();
 
         walletBtn.innerText =
-          connectedWallet.slice(0,6)
+          address.slice(0,6)
           + "..."
-          + connectedWallet.slice(-4);
+          + address.slice(-4);
 
-        return connectedWallet;
+        statusEl.innerHTML =
+          "Wallet connected";
 
     }catch(err){
 
-        console.log(err);
+        console.error(err);
+
+        statusEl.innerHTML =
+          "Wallet connection error";
 
     }
 }
@@ -568,9 +586,6 @@ walletBtn.addEventListener(
 async function submitScore(){
 
     try{
-
-        statusEl.innerHTML =
-          "Connecting wallet...";
 
         const provider =
           new ethers.BrowserProvider(window.ethereum);
@@ -597,7 +612,7 @@ async function submitScore(){
         await tx.wait();
 
         statusEl.innerHTML =
-          "Score submitted!";
+          "Score submitted successfully";
 
         loadLeaderboard();
 
@@ -641,7 +656,9 @@ async function loadLeaderboard(){
 
         events.forEach(event=>{
 
-            const player = event.args.player;
+            const player =
+              event.args.player;
+
             const points =
               Number(event.args.points);
 
@@ -649,7 +666,7 @@ async function loadLeaderboard(){
               !bestScores[player] ||
               points > bestScores[player]
             ){
-                bestScores[player] = points;
+                bestScores[player]=points;
             }
 
         });
@@ -659,17 +676,17 @@ async function loadLeaderboard(){
           .sort((a,b)=>b[1]-a[1])
           .slice(0,7);
 
-        leaderboardRows.innerHTML = "";
+        leaderboardRows.innerHTML="";
 
         for(let i=0;i<7;i++){
 
             const row =
               document.createElement("div");
 
-            row.className = "lbRow";
+            row.className="lbRow";
 
-            let wallet = "---";
-            let points = "---";
+            let wallet="---";
+            let points="---";
 
             if(sorted[i]){
 
@@ -678,7 +695,8 @@ async function loadLeaderboard(){
                   + "..."
                   + sorted[i][0].slice(-4);
 
-                points = sorted[i][1];
+                points =
+                  sorted[i][1];
 
             }
 
